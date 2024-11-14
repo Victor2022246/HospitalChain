@@ -31,3 +31,19 @@ struct Appointment { // structure the appointments schedule
         uint serviceId;
         uint date;
         string doctor;}
+
+
+
+        
+        //Mapping to store the appointments information, and access the by id  
+mapping(uint => servicesMenu) public services;
+uint public serviceMenuCount; //Counter for menu items, used to assing unique ID
+
+mapping(address => Patient) public patients;
+
+mapping(uint => Appointment) public AppointmentSchedule;// mapping the insurance claims to a array search by patient account
+uint public appointmentCount;
+ mapping(address => bool) public RegisteredDoctors; // Addresses of doctors who are approved serch by accound number 
+
+
+}
