@@ -43,7 +43,7 @@ mapping(address => Patient) public patients;
 
 mapping(uint => Appointment) public AppointmentSchedule;// mapping the insurance claims to a array search by patient account
 uint public appointmentCount;
- mapping(address => bool) public RegisteredDoctors; // Addresses of doctors who are approved serch by accound number 
+ mapping(address => bool) public registeredDoctors; // Addresses of doctors who are approved serch by accound number 
 
 
 // EVENTS to be emmited during certain actions, helpful for tracking in the block chain
@@ -51,6 +51,26 @@ event ServiceMenuAdded(uint serviceId, string serviceName, uint price, string do
 event AppointmentMade(address pacient, uint serviceId, uint date, uint totalCost, string doctor, string treatmentDetails); // emmited when appointment is made
 event PaymentReceived(address pacient, uint amount, uint date); //emmited when payment is received
 event PatientRegistration (address patient, string patientName, uint age, bool registered);// emmited when patient is created
+
+
+// modifier to restric the actions to the adiministrator
+modifier onlyAdmin(){
+require(msg.sender == administrator, "only the admin can perform this action.");// check the function caller is the admin
+_;//continue the function execution
+
+}
+
+modifier patientRegistered(address _patient) { // checks if the patient is registered to the hospital 
+        require(patients[_patient].registered, "This patient is not registered and couldant be fund");
+        _;
+    }
+
+    modifier onlyDoctor() { // modifier to check if the doctor is registered
+        require(registeredDoctors[msg.sender], "you must be a registered doctor to perfor this action");
+        _;
+
+
+    }
 
 
 
