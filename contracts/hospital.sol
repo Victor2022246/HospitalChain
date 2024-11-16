@@ -46,4 +46,17 @@ uint public appointmentCount;
  mapping(address => bool) public RegisteredDoctors; // Addresses of doctors who are approved serch by accound number 
 
 
+// EVENTS to be emmited during certain actions, helpful for tracking in the block chain
+event ServiceMenuAdded(uint serviceId, string serviceName, uint price, string doctor); //Emmited when a new service is added 
+event AppointmentMade(address pacient, uint serviceId, uint date, uint totalCost, string doctor, string treatmentDetails); // emmited when appointment is made
+event PaymentReceived(address pacient, uint amount, uint date); //emmited when payment is received
+event PatientRegistration (address patient, string patientName, uint age, bool registered);// emmited when patient is created
+
+
+
+
+
+
+
+
 }
