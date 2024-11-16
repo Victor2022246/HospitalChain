@@ -13,7 +13,7 @@ struct servicesMenu{
     string serviceName; // name of the service done by the hospital
     uint price;  //price for the service 
     string doctorName;
-    uint date;
+    
 }
 struct Patient{    // structure for creationm of a Patient 
 
@@ -72,6 +72,19 @@ modifier patientRegistered(address _patient) { // checks if the patient is regis
 
     }
 
+
+
+constructor(){
+    administrator = msg.sender; //set the contract deployer as the admin
+}
+
+// function to add a new service to the list
+function addServiceMenu (string memory _serviceName, uint _price, string memory _doctorName ) public onlyAdmin {
+// create a nue menu appointment and store in the map
+services[serviceMenuCount]= servicesMenu(_serviceName, _price, _doctorName  );
+emit ServiceMenuAdded(serviceMenuCount, _serviceName, _price, _doctorName);// emmits the information of the appointment added to the service list 
+serviceMenuCount++; // increments the count of existing services 
+}
 
 
 
