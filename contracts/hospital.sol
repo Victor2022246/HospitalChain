@@ -87,6 +87,39 @@ serviceMenuCount++; // increments the count of existing services
 }
 
 
+// function to  Create a new patient profile
+    function RegisterPatient(string memory _patientName,  string memory _medHistory, uint256 _age, bool _registered) public {
+        require(!patients[msg.sender].registered, "Patient profile already exists");
+
+        patients[msg.sender] = Patient({
+            patientName: _patientName,
+             medHistory:_medHistory,
+           age: _age,
+           registered: true}
+        
+        );
+  emit PatientRegistration(msg.sender, _patientName, _age, _registered);// emits the created patient 
+
+    }
+
+
+
+
+
+
+//function to place an appointment to specific  service making sure patient is registered
+function makeAppointment (uint _serviceId, string memory _patientName , string memory _treatmentDetails, uint _date, string memory _doctor  ) public payable patientRegistered(msg.sender) {
+require(_serviceId < serviceMenuCount, "Invalid service");// ensure the service exists is valid
+servicesMenu memory service = services[_serviceId]; // get the information from the appointments menu by index as an array of objects
+uint totalCost = service.price;
+require(msg.value == totalCost, "incorrect payment amount."); // ensure the amount to be paid is right
+AppointmentSchedule[appointmentCount]= Appointment(msg.sender, _patientName, totalCost , _treatmentDetails, _serviceId, _date , _doctor );
+
+
+adminBalance += msg.value; // update owners balance with the amount paid 
+emit AppointmentMade ( msg.sender, _serviceId, _date, totalCost, _doctor, _treatmentDetails);
+emit PaymentReceived(msg.sender, msg.value, _date);
+}
 
 
 
