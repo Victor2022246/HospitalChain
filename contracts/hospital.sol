@@ -122,6 +122,24 @@ emit PaymentReceived(msg.sender, msg.value, _date);
 }
 
 
+//function to allow admin to withdraw funds from contrat balance
+function withdrawBalance() public onlyAdmin{
+uint amount = adminBalance;
+adminBalance = 0;
+payable(administrator).transfer(amount); // transfer amount to the admin balance
+
+}
+
+// function to get details of an specific service by id of the service  
+function getServicesMenu(uint _serviceId) public view returns ( string memory name, uint price){
+    require(_serviceId < serviceMenuCount, "invalid service ");
+    servicesMenu memory service = services[_serviceId];
+    return(service.serviceName, service.price);
+
+    
+
+}
+
 
 
 
