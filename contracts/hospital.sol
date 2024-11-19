@@ -141,6 +141,22 @@ function getServicesMenu(uint _serviceId) public view returns ( string memory na
 }
 
 
+// function to add new doctors to be able to read the appointments (admin only)
+    function newDoctor(address _doctor) public onlyAdmin {
+        registeredDoctors[_doctor] = true;
+    }
+
+// Get appointments for a patient (public)
+    function getAppointments(uint _patientId) public view onlyDoctor returns ( address patient,string memory patientName,uint256 amount,string memory treatmentDetails,
+        uint serviceId,uint date, string memory doctor) {
+         Appointment memory appointment = AppointmentSchedule[_patientId];
+        return( appointment.patient, appointment.patientName, appointment.amount,appointment.treatmentDetails, appointment.serviceId, appointment.date, appointment.doctor  );
+    }
+
+
+
+}
+
 
 
 }
