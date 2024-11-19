@@ -132,7 +132,7 @@ payable(administrator).transfer(amount); // transfer amount to the admin balance
 
 // function to get details of an specific service by id of the service  
 function getServicesMenu(uint _serviceId) public view returns ( string memory name, uint price){
-    require(_serviceId < serviceMenuCount, "invalid service ");
+    require(_serviceId < serviceMenuCount, "invalid service "); //checks if service is valid
     servicesMenu memory service = services[_serviceId];
     return(service.serviceName, service.price);
 

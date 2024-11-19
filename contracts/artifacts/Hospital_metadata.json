@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -187,20 +192,52 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "RegisteredDoctors",
-				"outputs": [
+						"internalType": "string",
+						"name": "_patientName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_medHistory",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_age",
+						"type": "uint256"
+					},
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "_registered",
 						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
+				"name": "RegisterPatient",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_serviceName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_doctorName",
+						"type": "string"
+					}
+				],
+				"name": "addServiceMenu",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -245,6 +282,125 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_patientId",
+						"type": "uint256"
+					}
+				],
+				"name": "getAppointments",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "patient",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "patientName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "treatmentDetails",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "serviceId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "doctor",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_serviceId",
+						"type": "uint256"
+					}
+				],
+				"name": "getServicesMenu",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_serviceId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_patientName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_treatmentDetails",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_date",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_doctor",
+						"type": "string"
+					}
+				],
+				"name": "makeAppointment",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_doctor",
+						"type": "address"
+					}
+				],
+				"name": "newDoctor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
@@ -270,6 +426,25 @@
 					{
 						"internalType": "bool",
 						"name": "registered",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "registeredDoctors",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
 						"type": "bool"
 					}
 				],
@@ -313,14 +488,16 @@
 						"internalType": "string",
 						"name": "doctorName",
 						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "date",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawBalance",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -352,11 +529,11 @@
 	},
 	"sources": {
 		"contracts/hospital.sol": {
-			"keccak256": "0xc4c140d45d0d547edc5fcffd23ce4dfc70a0f763a0537e1b0dad8e562ae55eda",
+			"keccak256": "0xe0e90ef5bda402a2d17e7b41bb15d0d5e6036a3972b159c84320e34693e87d1b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8a1410b571a1be7a09829614a3c22216cfd6b28ce2ba032a340d64883846cacd",
-				"dweb:/ipfs/QmdGsbt1QgqTKKX1wfMeC5RtRcRXD1D3VFou6sDDXtqY6A"
+				"bzz-raw://6f550e96daec5555bb554dab52addb4f0249f90945b35bc91099763a884285fa",
+				"dweb:/ipfs/QmNkZojGiDa89VvgeDXPof5Gefe2E2M3Lo9CgstrwRRbdj"
 			]
 		}
 	},
